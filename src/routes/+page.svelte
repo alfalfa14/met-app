@@ -2,6 +2,7 @@
 	let searchTerm: string = $state('');
 	let objectIDs: number[] = $state([]);
 
+	// AI assisted: consulted AI for syntax on using async/await with the Met search API, and for using optional chaining (?.) and nullish coalescing (??) operators
 	async function search() {
 		if (!searchTerm) return;
 		const response = await fetch(
@@ -11,6 +12,7 @@
 		objectIDs = data.objectIDs?.slice(0, 10) ?? [];
 	}
 
+	// AI assisted: consulted AI for syntax on using async/await to fetch individual object data by ID from the Met API
 	async function getObjectData(id: number) {
 		const response = await fetch(
 			`https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`
@@ -31,6 +33,7 @@
 	<input bind:value={searchTerm} placeholder="Search for artworks by keyword (limit 10) ..." />
 	<button onclick={search}>Search</button>
 
+	<!-- AI assisted: consulted AI for syntax on using {#await} block to asynchronously fetch and display each search result as an anchor link -->
 	{#if objectIDs.length === 0}
 		<p>No results found. Try searching for "sunflower" or "monet".</p>
 	{:else}
